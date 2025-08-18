@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>♥ I C H I R I N ♥</title>
+      <link rel="stylesheet" href="css/style.css">
+      <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  </head>
+  <body>
+  <div class="editor">
+    <!-- 전체 틀 -->
+    <div id="character_wrap">
+      <!-- 캐릭터가 나오는 부분 -->
+      <div class="character_wrapper">
+        <img id="base" src="img/민둥이.png" alt="공통 베이스" />
+        <img id="outfit_R" src="" alt="" style="display:none;" />
+        <img id="hair_R" src="" alt="" style="display:none;" />
+        <img id="hair_R_1" src="" alt="" style="display:none;" />
+        <img id="hair_R_2" src="" alt="" style="display:none;" />
+        <img id="outfit_J" src="" alt="" style="display:none;" />
+        <img id="hair_J" src="" alt="" style="display:none;" />
+      </div>
+      <!-- 캐릭터 전환 탭 -->
+      <div class="character_tabs">
+        <!-- 로즈 -->
+        <img id="btn_R" src="img/R_활성화.png" 
+            onclick="setActiveCharacter('R')" 
+            onmouseover="hoverCharacter('R')" 
+            onmouseout="unhoverCharacter('R')" />
+        <!-- 쥰이치로 -->
+        <img id="btn_J" src="img/J_비활성화.png" 
+            onclick="setActiveCharacter('J')" 
+            onmouseover="hoverCharacter('J')" 
+            onmouseout="unhoverCharacter('J')" />
+      </div>
+      <!-- 페어명 -->
+      <p>ICHIRIN</p>
+    </div>
+
+    <!-- 의상 전환 탭 -->
+    <div class="tab_container">
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('hair')">머리</button>
+        <button class="tab" onclick="showTab('outfit')">옷</button>
+      </div>
+      <!-- 머리 -->
+      <div class="tab_content active" id="hair">
+        <button onclick="changeHair('초등부_헤어')">초등부</button>
+        <button onclick="changeHair('고등부_헤어')">고등부</button>
+        <button onclick="changeHair('사복1_헤어')">사복</button>
+        <button onclick="changeHair('사복1_헤어')">♥</button>
+        <button onclick="changeHair('사복1_헤어')">♥</button>                
+      </div>
+      <!-- 의상 -->
+      <div class="tab_content" id="outfit">
+        <button onclick="changeOutfit('초등부_의상')">초등부</button>
+        <button onclick="changeOutfit('고등부_의상')">고등부</button>
+        <button onclick="changeOutfit('사복1_의상')">사복</button>
+      </div>
+    </div>
+  </div>
+  <!-- 이미지 저장 버튼 -->
+   <div class="save_btn">
+      <button onclick="saveCharacterImage()"><p>전체저장</p></button>
+      <button onclick="saveOnlyCharacter()"><p>그림저장</p></button>
+    </div>
+  <script src="js/script.js"></script>
+  </body>
+</html>
