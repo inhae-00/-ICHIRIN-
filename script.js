@@ -67,25 +67,15 @@ function saveOnlyCharacter() {
       useCORS: false,
       scale: 1,
       backgroundColor: null
-    }).then(originalCanvas => {
-      const width = 700;
-      const height = 480;
-
-      const croppedCanvas = document.createElement('canvas');
-      croppedCanvas.width = width;
-      croppedCanvas.height = height;
-
-      const ctx = croppedCanvas.getContext('2d');
-
-      ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
-
+    }).then(canvas => {
       const link = document.createElement('a');
-      link.href = croppedCanvas.toDataURL('image/png');
+      link.href = canvas.toDataURL('image/png');
       link.download = 'ICHIRIN.png';
       link.click();
     });
   });
 }
+
 
 // 의상 변경
 function changeOutfit(type) {
