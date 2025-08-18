@@ -62,10 +62,16 @@ function saveFullEditor() {
 function saveOnlyCharacter() {
   const target = document.querySelector('.character_wrapper');
 
+  // 모바일 여부
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
+  // 모바일이면 크게 저장 아니면 기본값
+  const scaleValue = isMobile ? 3 : 2;
+
   document.fonts.ready.then(() => {
     html2canvas(target, {
       useCORS: false,
-      scale: 1,
+      scale: scaleValue,
       backgroundColor: null
     }).then(canvas => {
       const link = document.createElement('a');
@@ -75,6 +81,7 @@ function saveOnlyCharacter() {
     });
   });
 }
+
 
 
 // 의상 변경
