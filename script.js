@@ -28,6 +28,51 @@ function showTab(tabName) {
   document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
 }
 
+// 저장버튼
+function saveCharacterImage() {
+const target = document.getElementById('character_wrap');
+
+document.fonts.ready.then(() => {
+  html2canvas(target, {
+    useCORS: true,
+    scale: 2,
+    foreignObjectRendering: true
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.href = canvas.toDataURL('image/png');
+    link.download = 'ICHIRIN.png';
+    link.click();
+  });
+});
+}
+function saveOnlyCharacter() {
+const target = document.querySelector('.character_wrapper');
+
+document.fonts.ready.then(() => {
+  html2canvas(target, {
+    useCORS: false,
+    scale: 1,
+    backgroundColor: null
+  }).then(originalCanvas => {
+    const width = 910;
+    const height = 620;
+
+    const croppedCanvas = document.createElement('canvas');
+    croppedCanvas.width = width;
+    croppedCanvas.height = height;
+
+    const ctx = croppedCanvas.getContext('2d');
+
+    ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
+
+    const link = document.createElement('a');
+    link.href = croppedCanvas.toDataURL('image/png');
+    link.download = 'ICHIRIN.png';
+    link.click();
+  });
+});
+}
+
 
 // 의상 변경
 function changeOutfit(type) {
@@ -46,27 +91,26 @@ function changeHair(type) {
     document.getElementById('hair_R_2').style.display = 'none';
 
     if (type === '초등부_헤어') {
-      // 초등부는 밑/위 따로 있음
+      // 초등부는 밑/위 이미지 두 개로 구성
       document.getElementById('hair_R').src = '';
       document.getElementById('hair_R_1').src = 'img/R_초등부_헤어_밑.png';
       document.getElementById('hair_R_2').src = 'img/R_초등부_헤어_위.png';
       document.getElementById('hair_R_1').style.display = 'block';
       document.getElementById('hair_R_2').style.display = 'block';
     } else {
-      // 단일 이미지 
+      // 고등부 등 단일 이미지 처리
       document.getElementById('hair_R').src = `img/R_${type}.png`;
       document.getElementById('hair_R').style.display = 'block';
     }
   }
 
   if (activeCharacter === 'J') {
-    // 쥰이치로 헤어
+    // J 캐릭터 헤어 처리
     document.getElementById('hair_J').style.display = 'none';
     document.getElementById('hair_J').src = `img/J_${type}.png`;
     document.getElementById('hair_J').style.display = 'block';
   }
 }
-
 
 // 초기 헤어 설정
 function applyInitialHair(char, type) {
@@ -93,57 +137,16 @@ function applyInitialHair(char, type) {
   }
 }
 
-
-// 저장버튼
-function saveCharacterImage() {
-  const target = document.querySelector('.character_wrapper'); // 캐릭터만 캡처
-
-  document.fonts.ready.then(() => {
-    html2canvas(target, {
-      useCORS: true,
-      scale: 2,
-      backgroundColor: null
-    }).then(canvas => {
-      const oldCanvas = document.getElementById('previewCanvas');
-      if (oldCanvas) oldCanvas.remove();
-
-      canvas.id = 'previewCanvas';
-      canvas.style.border = '2px solid #333';
-      canvas.style.marginTop = '20px';
-      canvas.style.maxWidth = '100%';
-      document.body.appendChild(canvas);
-
-      alert('이미지가 아래에 표시되었습니다. 우클릭 후 \"이미지 저장\"을 선택하세요.');
-    });
-  });
-}
-
-
-function saveOnlyCharacter() {
-const target = document.querySelector('.character_wrapper');
-
-document.fonts.ready.then(() => {
-  html2canvas(target, {
-    useCORS: false,
-    scale: 1,
-    backgroundColor: null
-  }).then(originalCanvas => {
-    const width = 910;
-    const height = 620;
-
-    const croppedCanvas = document.createElement('canvas');
-    croppedCanvas.width = width;
-    croppedCanvas.height = height;
-
-    const ctx = croppedCanvas.getContext('2d');
-
-    ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
-
-    const link = document.createElement('a');
-    link.href = croppedCanvas.toDataURL('image/png');
-    link.download = 'ICHIRIN.png';
-    link.click();
-  });
+function saveEditorImage() {
+const editor = document.querySelector('#character_wrap');
+html2canvas(editor, {
+  useCORS: true,
+  scale: 2
+}).then(canvas => {
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL('image/png');
+  link.download = 'ICHIRIN.png';
+  link.click();
 });
 }
 
