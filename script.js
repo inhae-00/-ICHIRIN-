@@ -66,7 +66,7 @@ function saveOnlyCharacter() {
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
   // 모바일이면 크게 저장 아니면 기본값
-  const scaleValue = isMobile ? 3 : 2;
+  const scaleValue = isMobile ? 3 : 1;
 
   document.fonts.ready.then(() => {
     html2canvas(target, {
