@@ -29,7 +29,7 @@ function showTab(tabName) {
 }
 
 // 저장버튼
-function saveCharacterImage() {
+function saveFullEditor() {
 const target = document.getElementById('character_wrap');
 
 document.fonts.ready.then(() => {
