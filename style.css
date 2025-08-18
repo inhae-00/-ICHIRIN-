@@ -51,7 +51,7 @@ body {background-color: #fffff0; text-align: center;}
   background-color: #ffffff;
   position: relative;
   width: 800px;
-  height: 610px;
+  height: 550px;
   border: 4px solid #666;
   border-radius: 6px;
   margin: 10px auto 20px;
@@ -76,7 +76,7 @@ body {background-color: #fffff0; text-align: center;}
 
 /* 꾸밈 선택창 */
 .tab_container {
-  width: 500px;
+  width: 450px;
   background-color: #ffffff;
   border: 4px solid #333;
   border-radius: 4px;
