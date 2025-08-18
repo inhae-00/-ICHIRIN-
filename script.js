@@ -1,16 +1,20 @@
+// 활성화 캐릭터
 let activeCharacter = 'R';
 
-// 캐릭터 선택
+// 캐릭터 전환
 function setActiveCharacter(char) {
   activeCharacter = char;
   document.getElementById('btn_R').src = (char === 'R') ? 'img/R_활성화.png' : 'img/R_비활성화.png';
   document.getElementById('btn_J').src = (char === 'J') ? 'img/J_활성화.png' : 'img/J_비활성화.png';
 }
+
+// 캐릭터 전환 hover
 function hoverCharacter(char) {
   const btn = document.getElementById(`btn_${char}`);
   btn.src = `img/${char}_활성화.png`;
 }
 
+// 캐릭터 전환 hover 기존 활성화는 마우스 떼도 문제없게
 function unhoverCharacter(char) {
   const btn = document.getElementById(`btn_${char}`);
   btn.src = (activeCharacter === char) 
@@ -18,18 +22,20 @@ function unhoverCharacter(char) {
     : `img/${char}_비활성화.png`;
 }
 
-
 // 탭 전환
 function showTab(tabName) {
+  // 모든 콘텐츠 숨기기
   document.querySelectorAll('.tab_content').forEach(el => el.classList.remove('active'));
+  // 선택된 콘텐츠만 보이기
   document.getElementById(tabName).classList.add('active');
 
+  // 모든 탭 버튼에서 active 제거
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  // 클릭한 탭 버튼에 active 추가
   document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
 }
 
-// 저장버튼
-// 공통함수
+// 이미지로 저장 공통
 function captureAndDownload(selector, filename, options = {}) {
   const target = document.querySelector(selector);
   document.fonts.ready.then(() => {
@@ -47,12 +53,12 @@ function captureAndDownload(selector, filename, options = {}) {
   });
 }
 
-// 프레임 포함 저장
+// 전체 프레임 포함 저장
 function saveFullEditor() {
   captureAndDownload('#character_wrap', 'ICHIRIN.png', { foreignObjectRendering: true });
 }
 
-// 그림 쪽만
+// 캐릭터 그림만 저장
 function saveOnlyCharacter() {
   const target = document.querySelector('.character_wrapper');
 
@@ -81,7 +87,6 @@ function saveOnlyCharacter() {
   });
 }
 
-
 // 의상 변경
 function changeOutfit(type) {
   const imgId = `outfit_${activeCharacter}`;
@@ -93,27 +98,27 @@ function changeOutfit(type) {
 // 헤어 변경
 function changeHair(type) {
   if (activeCharacter === 'R') {
-    // 기존 헤어 숨기기
+    // 기존 헤어 숨김
     document.getElementById('hair_R').style.display = 'none';
     document.getElementById('hair_R_1').style.display = 'none';
     document.getElementById('hair_R_2').style.display = 'none';
 
     if (type === '초등부_헤어') {
-      // 초등부는 밑/위 이미지 두 개로 구성
+      // 초등부 헤어는 위/아래 나눠야했음
       document.getElementById('hair_R').src = '';
       document.getElementById('hair_R_1').src = 'img/R_초등부_헤어_밑.png';
       document.getElementById('hair_R_2').src = 'img/R_초등부_헤어_위.png';
       document.getElementById('hair_R_1').style.display = 'block';
       document.getElementById('hair_R_2').style.display = 'block';
     } else {
-      // 고등부 등 단일 이미지 처리
+      // 단일 이미지
       document.getElementById('hair_R').src = `img/R_${type}.png`;
       document.getElementById('hair_R').style.display = 'block';
     }
   }
 
   if (activeCharacter === 'J') {
-    // J 캐릭터 헤어 처리
+    // J 캐릭터 헤어 변경
     document.getElementById('hair_J').style.display = 'none';
     document.getElementById('hair_J').src = `img/J_${type}.png`;
     document.getElementById('hair_J').style.display = 'block';
@@ -145,11 +150,9 @@ function applyInitialHair(char, type) {
   }
 }
 
-
-
-// 페이지 로드 시 초기화
+// 페이지 로드 초기
 window.onload = function () {
   applyInitialHair('R', '초등부_헤어');
   applyInitialHair('J', '초등부_헤어');
-  showTab('hair'); // 머리 탭 기본 활성화
+  showTab('hair'); // 기본으로 머리 활성화
 };
