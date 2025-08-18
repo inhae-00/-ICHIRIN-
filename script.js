@@ -54,8 +54,8 @@ document.fonts.ready.then(() => {
     scale: 1,
     backgroundColor: null
   }).then(originalCanvas => {
-    const width = 910;
-    const height = 620;
+    const width = 700;
+    const height = 480;
 
     const croppedCanvas = document.createElement('canvas');
     croppedCanvas.width = width;
@@ -135,19 +135,6 @@ function applyInitialHair(char, type) {
     document.getElementById('hair_J').src = `img/J_${type}.png`;
     document.getElementById('hair_J').style.display = 'block';
   }
-}
-
-function saveEditorImage() {
-const editor = document.querySelector('#character_wrap');
-html2canvas(editor, {
-  useCORS: true,
-  scale: 2
-}).then(canvas => {
-  const link = document.createElement('a');
-  link.href = canvas.toDataURL('image/png');
-  link.download = 'ICHIRIN.png';
-  link.click();
-});
 }
 
 
