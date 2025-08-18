@@ -161,14 +161,14 @@ body {background-color: #fffff0; text-align: center;}
   /*  프레임  */
   #character_wrap {
     width: 90vw;
-    height: 70vw;
+    height: 100vw;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  /*  캐릭터 나오는 곳곳  */
+  /*  캐릭터 나오는 곳  */
   .character_wrapper {
     width: 85%;
     margin-bottom: 20px;
