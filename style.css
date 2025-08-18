@@ -205,9 +205,9 @@ body {background-color: #fffff0; text-align: center;}
   }
 
   .tab_content button {
-    width: 15%;
-    padding: 10px;
-    font-size: 1.4em;
+    width: 17%;
+    padding: 6px;
+    font-size: 1.2em;
   }
 
   /*  저장버튼  */
