@@ -29,7 +29,7 @@ function showTab(tabName) {
 }
 
 // 저장버튼
-// 공통함
+// 공통함수
 function captureAndDownload(selector, filename, options = {}) {
   const target = document.querySelector(selector);
   document.fonts.ready.then(() => {
@@ -49,7 +49,7 @@ function captureAndDownload(selector, filename, options = {}) {
 
 // 프레임 포함 저장
 function saveFullEditor() {
-  captureAndDownload('body', 'ICHIRIN.png', { foreignObjectRendering: true });
+  captureAndDownload('#character_wrap', 'ICHIRIN.png', { foreignObjectRendering: true });
 }
 
 // 그림 쪽만
