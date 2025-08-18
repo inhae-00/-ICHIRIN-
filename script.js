@@ -29,48 +29,48 @@ function showTab(tabName) {
 }
 
 // 저장버튼
-function saveFullEditor() {
-const target = document.getElementById('character_wrap');
-
-document.fonts.ready.then(() => {
-  html2canvas(target, {
-    useCORS: true,
-    scale: 2,
-    foreignObjectRendering: true
-  }).then(canvas => {
-    const link = document.createElement('a');
-    link.href = canvas.toDataURL('image/png');
-    link.download = 'ICHIRIN.png';
-    link.click();
+function captureAndDownload(selector, filename, options = {}) {
+  const target = document.querySelector(selector);
+  document.fonts.ready.then(() => {
+    html2canvas(target, {
+      useCORS: true,
+      scale: 2,
+      backgroundColor: null,
+      ...options
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = filename;
+      link.click();
+    });
   });
-});
 }
-function saveOnlyCharacter() {
-const target = document.querySelector('.character_wrapper');
 
-document.fonts.ready.then(() => {
-  html2canvas(target, {
-    useCORS: false,
-    scale: 1,
-    backgroundColor: null
-  }).then(originalCanvas => {
-    const width = 700;
-    const height = 480;
+function saveFullEditor() {
+  captureAndDownload('#character_wrap', 'ICHIRIN_full.png', { foreignObjectRendering: true });
+}
 
-    const croppedCanvas = document.createElement('canvas');
-    croppedCanvas.width = width;
-    croppedCanvas.height = height;
-
-    const ctx = croppedCanvas.getContext('2d');
-
-    ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
-
-    const link = document.createElement('a');
-    link.href = croppedCanvas.toDataURL('image/png');
-    link.download = 'ICHIRIN.png';
-    link.click();
+function saveCharacterOnly() {
+  const target = document.querySelector('.character_wrapper');
+  document.fonts.ready.then(() => {
+    html2canvas(target, {
+      useCORS: false,
+      scale: 1,
+      backgroundColor: null
+    }).then(originalCanvas => {
+      const width = 910;
+      const height = 620;
+      const croppedCanvas = document.createElement('canvas');
+      croppedCanvas.width = width;
+      croppedCanvas.height = height;
+      const ctx = croppedCanvas.getContext('2d');
+      ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
+      const link = document.createElement('a');
+      link.href = croppedCanvas.toDataURL('image/png');
+      link.download = 'ICHIRIN_character.png';
+      link.click();
+    });
   });
-});
 }
 
 
