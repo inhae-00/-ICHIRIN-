@@ -47,14 +47,15 @@ function captureAndDownload(selector, filename, options = {}) {
   });
 }
 
-// 프레임 포 저장
+// 프레임 포함 저장
 function saveFullEditor() {
-  captureAndDownload('#character_wrap', 'ICHIRIN_full.png', { foreignObjectRendering: true });
+  captureAndDownload('body', 'ICHIRIN.png', { foreignObjectRendering: true });
 }
 
 // 그림 쪽만
-function saveCharacterOnly() {
+function saveOnlyCharacter() {
   const target = document.querySelector('.character_wrapper');
+
   document.fonts.ready.then(() => {
     html2canvas(target, {
       useCORS: false,
@@ -63,14 +64,18 @@ function saveCharacterOnly() {
     }).then(originalCanvas => {
       const width = 700;
       const height = 480;
+
       const croppedCanvas = document.createElement('canvas');
       croppedCanvas.width = width;
       croppedCanvas.height = height;
+
       const ctx = croppedCanvas.getContext('2d');
+
       ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
+
       const link = document.createElement('a');
       link.href = croppedCanvas.toDataURL('image/png');
-      link.download = 'ICHIRIN_character.png';
+      link.download = 'ICHIRIN.png';
       link.click();
     });
   });
