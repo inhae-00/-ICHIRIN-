@@ -172,7 +172,7 @@ body {background-color: #fffff0; text-align: center;}
   /*  캐릭터 나오는 곳  */
   .character_wrapper {
     width: 85%;
-    height : 90%;
+    height : 260px;
     margin-bottom: 10px;
   }
 
