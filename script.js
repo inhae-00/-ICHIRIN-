@@ -29,6 +29,7 @@ function showTab(tabName) {
 }
 
 // 저장버튼
+// 공통함
 function captureAndDownload(selector, filename, options = {}) {
   const target = document.querySelector(selector);
   document.fonts.ready.then(() => {
@@ -46,10 +47,12 @@ function captureAndDownload(selector, filename, options = {}) {
   });
 }
 
+// 프레임 포 저장
 function saveFullEditor() {
   captureAndDownload('#character_wrap', 'ICHIRIN_full.png', { foreignObjectRendering: true });
 }
 
+// 그림 쪽만
 function saveCharacterOnly() {
   const target = document.querySelector('.character_wrapper');
   document.fonts.ready.then(() => {
@@ -58,8 +61,8 @@ function saveCharacterOnly() {
       scale: 1,
       backgroundColor: null
     }).then(originalCanvas => {
-      const width = 910;
-      const height = 620;
+      const width = 700;
+      const height = 480;
       const croppedCanvas = document.createElement('canvas');
       croppedCanvas.width = width;
       croppedCanvas.height = height;
