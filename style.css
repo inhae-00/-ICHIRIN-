@@ -39,7 +39,7 @@ body {background-color: #fffff0; text-align: center;}
   box-shadow: 5px 5px 1px #cccccc;
   border-radius: 30px;
   width: 800px;
-  height: auto;
+  height: fit-content;
   margin: 0;
 }
 /* 페어명 꾸밈 */
@@ -63,6 +63,7 @@ body {background-color: #fffff0; text-align: center;}
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1;
 }
 
 /* 캐릭터 선택 버튼 */
