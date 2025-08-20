@@ -36,6 +36,48 @@ function showTab(tabName) {
 }
 
 
+// 캐릭터 저장버튼
+function saveOnlyCharacter() {
+  const target = document.querySelector('.character_wrapper');
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const scaleValue = isMobile ? 3 : 1;
+
+  document.fonts.ready.then(() => {
+    html2canvas(target, {
+      useCORS: false,
+      scale: scaleValue,
+      backgroundColor: null
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'ICHIRIN.png';
+      link.click();
+    });
+  });
+}
+
+// 프레임 저장버튼
+function saveFullEditor() {
+  const target = document.getElementById('character_wrap');
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const scaleValue = isMobile ? 3 : 2;
+
+  document.fonts.ready.then(() => {
+    html2canvas(target, {
+      useCORS: true,
+      scale: scaleValue,
+      backgroundColor: null,
+      foreignObjectRendering: true
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'ICHIRIN_full.png';
+      link.click();
+    });
+  });
+}
+
+
 // 의상 변경
 function changeOutfit(type) {
   const imgId = `outfit_${activeCharacter}`;
@@ -74,6 +116,7 @@ function changeHair(type) {
   }
 }
 
+
 // 초기 헤어 설정
 function applyInitialHair(char, type) {
   if (char === 'R') {
@@ -98,6 +141,7 @@ function applyInitialHair(char, type) {
     document.getElementById('hair_J').style.display = 'block';
   }
 }
+
 
 // 페이지 로드 초기
 window.onload = function () {
