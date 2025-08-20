@@ -35,16 +35,15 @@ function showTab(tabName) {
   document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
 }
 
-// 이미지로 저장 공통
-function captureAndDownload(selector, filename, options = {}) {
-  const target = document.querySelector(selector);
+  // 전체 저
+function saveCharacterImage() {
+  const target = document.getElementById('character_wrap');
+
   document.fonts.ready.then(() => {
     html2canvas(target, {
       useCORS: true,
       scale: 2,
-      foreignObjectRendering: true,
-      backgroundColor: null,
-      ...options
+      foreignObjectRendering: true
     }).then(canvas => {
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
@@ -54,14 +53,37 @@ function captureAndDownload(selector, filename, options = {}) {
   });
 }
 
-// 전체 프레임 포함 저장
-function saveFullEditor() {
-  captureAndDownload('#character_wrap', 'ICHIRIN.png');
-}
-
-// 캐릭터 그림만 저장
+  // 캐릭터 부분만 저장
 function saveOnlyCharacter() {
   const target = document.querySelector('.character_wrapper');
+
+  document.fonts.ready.then(() => {
+    html2canvas(target, {
+      useCORS: false,
+      scale: 2,
+      backgroundColor: null
+    }).then(originalCanvas => {
+      const rect = target.getBoundingClientRect();
+
+      const croppedCanvas = document.createElement('canvas');
+      croppedCanvas.width = rect.width;
+      croppedCanvas.height = rect.height;
+
+      const ctx = croppedCanvas.getContext('2d');
+
+      ctx.drawImage(
+        originalCanvas,
+        0, 0, rect.width, rect.height,
+        0, 0, rect.width, rect.height
+      );
+
+      const link = document.createElement('a');
+      link.href = croppedCanvas.toDataURL('image/png');
+      link.download = 'ICHIRIN.png';
+      link.click();
+    });
+  });
+}
 
   // 모바일 여부
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
