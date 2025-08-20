@@ -55,7 +55,7 @@ function captureAndDownload(selector, filename, options = {}) {
 
 // 전체 프레임 포함 저장
 function saveFullEditor() {
-  const target = document.getElementById('character_wrap');
+  captureAndDownload('#character_wrap', 'ICHIRIN.png');
 }
 
 // 캐릭터 그림만 저장
