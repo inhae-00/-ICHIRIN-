@@ -47,7 +47,7 @@ function captureAndDownload(selector, filename, options = {}) {
     }).then(canvas => {
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
-      link.download = filename;
+      link.download = 'ICHIRIN.png';
       link.click();
     });
   });
@@ -55,7 +55,7 @@ function captureAndDownload(selector, filename, options = {}) {
 
 // 전체 프레임 포함 저장
 function saveFullEditor() {
-  captureAndDownload('#character_wrap', 'ICHIRIN.png', { foreignObjectRendering: true });
+  const target = document.getElementById('character_wrap');
 }
 
 // 캐릭터 그림만 저장
