@@ -42,6 +42,7 @@ function captureAndDownload(selector, filename, options = {}) {
     html2canvas(target, {
       useCORS: true,
       scale: 2,
+      foreignObjectRendering: true,
       backgroundColor: null,
       ...options
     }).then(canvas => {
