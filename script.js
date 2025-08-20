@@ -36,6 +36,17 @@ function showTab(tabName) {
 }
 
 
+// 저장할 때 내가 선택 안 한 애들은 아예 없게
+function prepareForCapture() {
+  if (activeCharacter === 'R') {
+    document.getElementById('outfit_J').style.display = 'none';
+    document.getElementById('hair_J').style.display = 'none';
+  } else {
+    document.getElementById('outfit_R').style.display = 'none';
+    document.getElementById('hair_R').style.display = 'none';
+  }
+}
+
 // 캐릭터 저장버튼
 function saveOnlyCharacter() {
   const target = document.querySelector('.character_wrapper');
