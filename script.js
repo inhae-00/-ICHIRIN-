@@ -47,16 +47,18 @@ function saveOnlyCharacter() {
   const scaleValue = isMobile ? 3 : 1;
 
   document.fonts.ready.then(() => {
-    html2canvas(target, {
-      useCORS: false,
-      scale: scaleValue,
-      backgroundColor: null
-    }).then(canvas => {
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = 'ICHIRIN.png';
-      link.click();
-    });
+    setTimeout(() => {
+      html2canvas(target, {
+        useCORS: false,
+        scale: scaleValue,
+        backgroundColor: null
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'ICHIRIN.png';
+        link.click();
+      });
+    }, 300);
   });
 }
 
@@ -71,16 +73,18 @@ function saveFullEditor() {
   const scaleValue = isMobile ? 3 : 2;
 
   document.fonts.ready.then(() => {
-    html2canvas(target, {
-      useCORS: true,
-      scale: scaleValue,
-      backgroundColor: null,
-    }).then(canvas => {
-      const link = document.createElement('a');
-      link.href = canvas.toDataURL('image/png');
-      link.download = 'ICHIRIN.png';
-      link.click();
-    });
+    setTimeout(() => {
+      html2canvas(target, {
+        useCORS: true,
+        scale: scaleValue,
+        backgroundColor: null
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'ICHIRIN.png';
+        link.click();
+      });
+    }, 300); // 0.3초 지연
   });
 }
 
