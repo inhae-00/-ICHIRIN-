@@ -35,7 +35,7 @@ function showTab(tabName) {
   document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
 }
 
-  // 전체 저
+  // 전체 저장
 function saveCharacterImage() {
   const target = document.getElementById('character_wrap');
 
@@ -52,30 +52,26 @@ function saveCharacterImage() {
     });
   });
 }
-
-  // 캐릭터 부분만 저장
+  // 캐릭터쪽만
 function saveOnlyCharacter() {
   const target = document.querySelector('.character_wrapper');
 
   document.fonts.ready.then(() => {
     html2canvas(target, {
       useCORS: false,
-      scale: 2,
+      scale: 1,
       backgroundColor: null
     }).then(originalCanvas => {
-      const rect = target.getBoundingClientRect();
+      const width = 910;
+      const height = 620;
 
       const croppedCanvas = document.createElement('canvas');
-      croppedCanvas.width = rect.width;
-      croppedCanvas.height = rect.height;
+      croppedCanvas.width = width;
+      croppedCanvas.height = height;
 
       const ctx = croppedCanvas.getContext('2d');
 
-      ctx.drawImage(
-        originalCanvas,
-        0, 0, rect.width, rect.height,
-        0, 0, rect.width, rect.height
-      );
+      ctx.drawImage(originalCanvas, 0, 0, width, height, 0, 0, width, height);
 
       const link = document.createElement('a');
       link.href = croppedCanvas.toDataURL('image/png');
