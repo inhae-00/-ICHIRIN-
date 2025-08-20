@@ -67,11 +67,10 @@ function saveFullEditor() {
       useCORS: true,
       scale: scaleValue,
       backgroundColor: null,
-      foreignObjectRendering: true
     }).then(canvas => {
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
-      link.download = 'ICHIRIN_full.png';
+      link.download = 'ICHIRIN.png';
       link.click();
     });
   });
