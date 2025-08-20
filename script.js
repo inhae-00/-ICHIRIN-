@@ -44,12 +44,19 @@ function prepareForCapture() {
   } else {
     document.getElementById('outfit_R').style.display = 'none';
     document.getElementById('hair_R').style.display = 'none';
+    document.getElementById('hair_R_1').style.display = 'none';
+    document.getElementById('hair_R_2').style.display = 'none';
   }
 }
 
+
 // 캐릭터 저장버튼
 function saveOnlyCharacter() {
+  prepareForCapture();
   const target = document.querySelector('.character_wrapper');
+
+  target.style.height = target.scrollHeight + 'px';
+  
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const scaleValue = isMobile ? 3 : 1;
 
@@ -69,7 +76,11 @@ function saveOnlyCharacter() {
 
 // 프레임 저장버튼
 function saveFullEditor() {
+  prepareForCapture();
   const target = document.getElementById('character_wrap');
+
+  target.style.height = target.scrollHeight + 'px';
+  
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const scaleValue = isMobile ? 3 : 2;
 
