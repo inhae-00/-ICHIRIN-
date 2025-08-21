@@ -127,6 +127,12 @@ function changeHair(type) {
   }
 }
 
+// 기타 꾸밈
+function changeAccessory(itemName) {
+  const accessoryImg = document.getElementById("etc");
+  accessoryImg.src = `img/${itemName}.png`;
+  accessoryImg.style.display = "block";
+}
 
 // 초기 헤어 설정
 function applyInitialHair(char, type) {
