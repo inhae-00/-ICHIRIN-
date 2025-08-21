@@ -35,14 +35,11 @@ function showTab(tabName) {
   document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
 }
 
-
 // 캐릭터 저장버튼
 function saveOnlyCharacter() {
-  prepareForCapture();
   const target = document.querySelector('.character_wrapper');
+  prepareForCapture(target);
 
-  target.style.height = target.scrollHeight + 'px';
-  
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const scaleValue = isMobile ? 3 : 1;
 
@@ -57,6 +54,7 @@ function saveOnlyCharacter() {
         link.href = canvas.toDataURL('image/png');
         link.download = 'ICHIRIN.png';
         link.click();
+        restoreAfterCapture(); // 캡처 후 복구
       });
     }, 300);
   });
@@ -64,11 +62,9 @@ function saveOnlyCharacter() {
 
 // 프레임 저장버튼
 function saveFullEditor() {
-  prepareForCapture();
   const target = document.getElementById('character_wrap');
+  prepareForCapture(target);
 
-  target.style.height = target.scrollHeight + 'px';
-  
   const isMobile = /Mobi|Android/i.test(navigator.userAgent);
   const scaleValue = isMobile ? 3 : 2;
 
@@ -83,11 +79,11 @@ function saveFullEditor() {
         link.href = canvas.toDataURL('image/png');
         link.download = 'ICHIRIN.png';
         link.click();
+        restoreAfterCapture(); // 캡처 후 복구
       });
     }, 300); // 0.3초 지연
   });
 }
-
 
 // 의상 변경
 function changeOutfit(type) {
@@ -159,36 +155,9 @@ function applyInitialHair(char, type) {
   }
 }
 
-
 // 페이지 로드 초기
 window.onload = function () {
   applyInitialHair('R', '초등부_헤어');
   applyInitialHair('J', '초등부_헤어');
   showTab('hair'); // 기본으로 머리 활성화
 };
-
-// 저 전 준비
-function prepareForCapture() {
-  // 저장 버튼과 탭 버튼 숨기기
-  document.querySelectorAll('.save_button, .tab').forEach(el => {
-    el.style.visibility = 'hidden';
-  });
-
-  // 스크롤 제거
-  document.body.style.overflow = 'hidden';
-
-  // 캐릭터 영역 높이 자동 조정
-  const wrapper = document.querySelector('.character_wrapper');
-  if (wrapper) {
-    wrapper.style.height = wrapper.scrollHeight + 'px';
-  }
-}
-
-// 저장 후 복구
-function restoreAfterCapture() {
-  document.querySelectorAll('.save_button, .tab').forEach(el => {
-    el.style.visibility = 'visible';
-  });
-  document.body.style.overflow = 'auto';
-}
-
