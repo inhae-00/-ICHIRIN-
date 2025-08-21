@@ -125,9 +125,10 @@ function changeHair(type) {
 
 // 기타 꾸밈
 function changeEtc(itemName) {
-  const etcImg = document.getElementById("etc");
+  const imgId = `etc_${activeCharacter}`;
+  const etcImg = document.getElementById(imgId);
   etcImg.src = `img/${itemName}.png`;
-  etcImg.style.display = "block";
+  etcImg.style.display = 'block';
 }
 
 // 초기 헤어 설정
