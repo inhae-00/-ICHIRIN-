@@ -194,11 +194,7 @@ body {background-color: #fffff0; text-align: center;}
     padding: 0;
     text-align: center;
   }
-
-  .tab:hover {
-    border-radius: 20px 20px 0 0;
-  }
-
+  
   .tab_content {
     display: none;
     justify-content: center;
