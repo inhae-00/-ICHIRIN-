@@ -166,3 +166,29 @@ window.onload = function () {
   applyInitialHair('J', '초등부_헤어');
   showTab('hair'); // 기본으로 머리 활성화
 };
+
+// 저 전 준비
+function prepareForCapture() {
+  // 저장 버튼과 탭 버튼 숨기기
+  document.querySelectorAll('.save_button, .tab').forEach(el => {
+    el.style.visibility = 'hidden';
+  });
+
+  // 스크롤 제거
+  document.body.style.overflow = 'hidden';
+
+  // 캐릭터 영역 높이 자동 조정
+  const wrapper = document.querySelector('.character_wrapper');
+  if (wrapper) {
+    wrapper.style.height = wrapper.scrollHeight + 'px';
+  }
+}
+
+// 저장 후 복구
+function restoreAfterCapture() {
+  document.querySelectorAll('.save_button, .tab').forEach(el => {
+    el.style.visibility = 'visible';
+  });
+  document.body.style.overflow = 'auto';
+}
+
