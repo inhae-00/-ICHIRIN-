@@ -24,15 +24,24 @@ function unhoverCharacter(char) {
 
 // 탭 전환
 function showTab(tabName) {
-  // 모든 콘텐츠 숨기기
   document.querySelectorAll('.tab_content').forEach(el => el.classList.remove('active'));
-  // 선택된 콘텐츠만 보이기
   document.getElementById(tabName).classList.add('active');
-
-  // 모든 탭 버튼에서 active 제거
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-  // 클릭한 탭 버튼에 active 추가
   document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
+}
+
+// 저장 전 UI 숨기기
+function prepareForCapture(target) {
+  document.querySelectorAll('.tab_container, .save_buttons').forEach(el => {
+    el.style.visibility = 'hidden';
+  });
+}
+
+// 저장 후 UI 복구
+function restoreAfterCapture() {
+  document.querySelectorAll('.tab_container, .save_buttons').forEach(el => {
+    el.style.visibility = 'visible';
+  });
 }
 
 // 캐릭터 저장버튼
@@ -54,7 +63,7 @@ function saveOnlyCharacter() {
         link.href = canvas.toDataURL('image/png');
         link.download = 'ICHIRIN.png';
         link.click();
-        restoreAfterCapture(); // 캡처 후 복구
+        restoreAfterCapture();
       });
     }, 300);
   });
@@ -79,9 +88,9 @@ function saveFullEditor() {
         link.href = canvas.toDataURL('image/png');
         link.download = 'ICHIRIN.png';
         link.click();
-        restoreAfterCapture(); // 캡처 후 복구
+        restoreAfterCapture();
       });
-    }, 300); // 0.3초 지연
+    }, 300);
   });
 }
 
@@ -96,27 +105,23 @@ function changeOutfit(type) {
 // 헤어 변경
 function changeHair(type) {
   if (activeCharacter === 'R') {
-    // 기존 헤어 숨김
     document.getElementById('hair_R').style.display = 'none';
     document.getElementById('hair_R_1').style.display = 'none';
     document.getElementById('hair_R_2').style.display = 'none';
 
     if (type === '초등부_헤어') {
-      // 초등부 헤어는 위/아래 나눠야했음
       document.getElementById('hair_R').src = '';
       document.getElementById('hair_R_1').src = 'img/R_초등부_헤어_밑.png';
       document.getElementById('hair_R_2').src = 'img/R_초등부_헤어_위.png';
       document.getElementById('hair_R_1').style.display = 'block';
       document.getElementById('hair_R_2').style.display = 'block';
     } else {
-      // 단일 이미지
       document.getElementById('hair_R').src = `img/R_${type}.png`;
       document.getElementById('hair_R').style.display = 'block';
     }
   }
 
   if (activeCharacter === 'J') {
-    // J 캐릭터 헤어 변경
     document.getElementById('hair_J').style.display = 'none';
     document.getElementById('hair_J').src = `img/J_${type}.png`;
     document.getElementById('hair_J').style.display = 'block';
@@ -160,5 +165,5 @@ function applyInitialHair(char, type) {
 window.onload = function () {
   applyInitialHair('R', '초등부_헤어');
   applyInitialHair('J', '초등부_헤어');
-  showTab('hair'); // 기본으로 머리 활성화
+  showTab('hair');
 };
