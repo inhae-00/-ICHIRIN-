@@ -69,30 +69,6 @@ function saveOnlyCharacter() {
   });
 }
 
-// 프레임 저장버튼
-function saveFullEditor() {
-  const target = document.getElementById('character_wrap');
-  prepareForCapture(target);
-
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const scaleValue = isMobile ? 3 : 2;
-
-  document.fonts.ready.then(() => {
-    setTimeout(() => {
-      html2canvas(target, {
-        useCORS: true,
-        scale: scaleValue,
-        backgroundColor: null
-      }).then(canvas => {
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'ICHIRIN.png';
-        link.click();
-        restoreAfterCapture();
-      });
-    }, 300);
-  });
-}
 
 // 의상 변경
 function changeOutfit(type) {
